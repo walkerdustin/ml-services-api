@@ -1,8 +1,14 @@
 from fastapi import Request, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from mlModel import MLmodel
 
 app = FastAPI()
 mlModel = MLmodel()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*']
+)
 
 @app.get("/")
 def read_root():
@@ -12,11 +18,11 @@ def read_root():
 async def get_body(request: Request):
     json = await request.json()
     print(json)
+    print(json["volatile acidity"])
     print(type(json))
     data = list(json.values())
     print(data)
     print(type(data[0]))
-    print(json["volatile acidity"])
     
     prediction = mlModel.predict(data)
     print(f'{prediction = }')
