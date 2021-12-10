@@ -13,9 +13,11 @@ uvicorn main:app --reload
 
 ## API
 ```bash
-.../predict
+https://predict-wine-quality-api.herokuapp.com/predict
+```
 
 POST request with body
+"""
 {
  "volatile acidity": 0.7,
  "citric acid": 0.0,
@@ -28,3 +30,4 @@ POST request with body
  "sulphates": 0.56,
  "alcohol": 9.4
 }
+"""
