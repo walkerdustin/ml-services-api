@@ -10,8 +10,7 @@ origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["POST", "GET"],
     allow_headers=["*"],
 )
 
@@ -21,9 +20,10 @@ def read_root():
 
 @app.post("/predict")
 async def get_body(request: Request):
+    print(request)
     json = await request.json()
     print(json)
-    print(json["volatile acidity"])
+    # print(json["volatile acidity"])
     print(type(json))
     data = list(json.values())
     print(data)
@@ -31,8 +31,8 @@ async def get_body(request: Request):
     
     prediction = mlModel.predict(data)
     print(f'{prediction = }')
-    str(prediction[0].round(0))
-    return str(prediction[0].round(0))
+    value = str(int(prediction[0].round(0)))
+    return value
 
 # {
 #  "volatile acidity": 0.7,
