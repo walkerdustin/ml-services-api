@@ -20,14 +20,8 @@ def read_root():
 
 @app.post("/predict")
 async def get_body(request: Request):
-    print(request)
     json = await request.json()
-    print(json)
-    # print(json["volatile acidity"])
-    print(type(json))
     data = list(json.values())
-    print(data)
-    print(type(data[0]))
     
     prediction = mlModel.predict(data)
     print(f'{prediction = }')
